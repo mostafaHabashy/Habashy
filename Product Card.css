@@ -1,0 +1,12 @@
+
+div{
+    background-color: burlywood;
+    border: 5px solid black ;
+    width: 30%;
+}
+img{
+border: 5px solid blue;
+}
+h1{
+    border: 5px dashed black;
+}
