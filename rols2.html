@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusive E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4d44db;
+            --accent-color: #ff6584;
+            --dark-color: #2d3748;
+            --light-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+        
+        .carousel-img {
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .category-icon {
+            font-size: 28px;
+            padding: 25px;
+            border: 1px solid #eee;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            color: var(--primary-color);
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .category-icon:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(108, 99, 255, 0.2);
+        }
+        
+        .category-icon i {
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .timer {
+            font-weight: bold;
+            font-size: 1.2rem;
+            background-color: var(--dark-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+        }
+        
+        .badge-discount {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: contain;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-body h6 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .card-body p {
+            margin: 0;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        .rating {
+            color: #ffc107;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .btn-outline-dark {
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+        
+        section {
+            margin-bottom: 50px;
+        }
+        
+        .feature-box {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-box i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .newsletter {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+        
+        .newsletter .form-control {
+            height: 50px;
+            border-radius: 30px;
+            border: none;
+        }
+        
+        .newsletter .btn {
+            background-color: white;
+            color: var(--primary-color);
+            font-weight: 600;
+            border-radius: 30px;
+            padding: 10px 25px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-links h5 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+        
+        .product-card .add-to-cart {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .product-card:hover .add-to-cart {
+            bottom: 0;
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .carousel-img {
+                height: 250px;
+            }
+            
+            .category-icon {
+                padding: 15px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Exclusive</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <form class="d-flex me-3">
+                        <div class="input-group">
+                            <input class="form-control border-end-0" type="search" placeholder="Search products...">
+                            <button class="btn btn-outline-secondary border-start-0" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="d-flex">
+                        <a href="#" class="text-dark position-relative me-3">
+                            <i class="fas fa-heart fs-5"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                3
+                            </span>
+                        </a>
+                        <a href="#" class="text-dark position-relative me-3">
+                            <i class="fas fa-shopping-cart fs-5"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                5
+                            </span>
+                        </a>
+                        <a href="#" class="text-dark">
+                            <i class="fas fa-user fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <!-- Banner Carousel -->
+        <div id="mainCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100 carousel-img" alt="Headphones Sale">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Summer Headphone Sale</h5>
+                        <p>Up to 50% off on premium headphones</p>
+                        <a href="#" class="btn btn-light">Shop Now</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100 carousel-img" alt="New Macbooks">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>New Macbook Pro</h5>
+                        <p>Experience the power of M2 chip</p>
+                        <a href="#" class="btn btn-light">Pre-order Now</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100 carousel-img" alt="Smart Watches">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Smart Watches</h5>
+                        <p>Track your fitness in style</p>
+                        <a href="#" class="btn btn-light">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <!-- Features -->
+        <div class="row text-center mb-5">
+            <div class="col-md-3">
+                <div class="feature-box">
+                    <i class="fas fa-truck"></i>
+                    <h5>Free Shipping</h5>
+                    <p>On all orders over $99</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-box">
+                    <i class="fas fa-undo"></i>
+                    <h5>Easy Returns</h5>
+                    <p>30-day return policy</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-box">
+                    <i class="fas fa-lock"></i>
+                    <h5>Secure Payment</h5>
+                    <p>100% secure checkout</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-box">
+                    <i class="fas fa-headset"></i>
+                    <h5>24/7 Support</h5>
+                    <p>Dedicated support</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flash Sales -->
+        <section>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold">Flash Sales</h2>
+                <div class="d-flex align-items-center">
+                    <div class="timer me-3">03 : 23 : 19 : 56</div>
+                    <a href="#" class="btn btn-outline-dark">View All</a>
+                </div>
+            </div>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <span class="badge-discount">-40%</span>
+                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top">
+                        <div class="card-body">
+                            <h6>Samsung Galaxy A55</h6>
+                            <p class="price">$120 <span class="old-price">$160</span></p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.5 (18 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <span class="badge-discount">-25%</span>
+                        <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top">
+                        <div class="card-body">
+                            <h6>Apple iPhone 13</h6>
+                            <p class="price">$749 <span class="old-price">$999</span></p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.8 (142 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <span class="badge-discount">-30%</span>
+                        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top">
+                        <div class="card-body">
+                            <h6>Sony WH-1000XM4</h6>
+                            <p class="price">$279 <span class="old-price">$399</span></p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.7 (89 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <span class="badge-discount">-15%</span>
+                        <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top">
+                        <div class="card-body">
+                            <h6>Dell XPS 15</h6>
+                            <p class="price">$1,699 <span class="old-price">$1,999</span></p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.6 (56 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="my-5">
+            <h2 class="fw-bold mb-4">Browse By Category</h2>
+            <div class="row text-center g-4">
+                <div class="col-6 col-md">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h6 class="mt-2">Phones</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop"></i>
+                        <h6 class="mt-2">Computers</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md">
+                    <div class="category-icon">
+                        <i class="fas fa-clock"></i>
+                        <h6 class="mt-2">SmartWatch</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md">
+                    <div class="category-icon">
+                        <i class="fas fa-camera"></i>
+                        <h6 class="mt-2">Camera</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md">
+                    <div class="category-icon">
+                        <i class="fas fa-headphones"></i>
+                        <h6 class="mt-2">Headphones</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md">
+                    <div class="category-icon">
+                        <i class="fas fa-tablet-alt"></i>
+                        <h6 class="mt-2">Tablets</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md">
+                    <div class="category-icon">
+                        <i class="fas fa-gamepad"></i>
+                        <h6 class="mt-2">Gaming</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md">
+                    <div class="category-icon">
+                        <i class="fas fa-home"></i>
+                        <h6 class="mt-2">Smart Home</h6>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Selling Products -->
+        <section>
+            <h2 class="fw-bold mb-4">Best Selling Products</h2>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top">
+                        <div class="card-body">
+                            <h6>Canon EOS R5</h6>
+                            <p class="price">$3,899</p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.9 (210 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top">
+                        <div class="card-body">
+                            <h6>Apple Watch Series 7</h6>
+                            <p class="price">$399</p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.7 (156 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top">
+                        <div class="card-body">
+                            <h6>MacBook Air M2</h6>
+                            <p class="price">$1,199</p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.8 (189 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top">
+                        <div class="card-body">
+                            <h6>Bose QuietComfort 45</h6>
+                            <p class="price">$329</p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.6 (97 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary">View All Products</a>
+            </div>
+        </section>
+
+        <!-- New Arrivals -->
+        <section>
+            <h2 class="fw-bold mb-4">New Arrivals</h2>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <span class="badge-discount">New</span>
+                        <img src="./sony playstastion.jfif" class="card-img-top">
+                        <div class="card-body">
+                            <h6>Sony PlayStation 5</h6>
+                            <p class="price">$499</p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.9 (312 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <span class="badge-discount">New</span>
+                        <img src="./phone.jpeg" class="card-img-top">
+                        <div class="card-body">
+                            <h6>Samsung Galaxy Z Flip 4</h6>
+                            <p class="price">$999</p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.5 (87 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <span class="badge-discount">New</span>
+                        <img src="./DJI Mini 3 Pro Drone.jpeg" class="card-img-top">
+                        <div class="card-body">
+                            <h6>DJI Mini 3 Pro Drone</h6>
+                            <p class="price">$759</p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.8 (134 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card position-relative product-card h-100">
+                        <span class="badge-discount">New</span>
+                        <img src="./iPad Pro 12.9.jpeg" class="card-img-top">
+                        <div class="card-body">
+                            <h6>iPad Pro 12.9" M1</h6>
+                            <p class="price">$1,099</p>
+                            <p class="rating"><i class="fas fa-star"></i> 4.7 (201 reviews)</p>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="btn btn-sm btn-light w-100">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h3 class="fw-bold">Subscribe to Newsletter</h3>
+                    <p>Get updates on special offers and promotions</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Brands -->
+        <section>
+            <h2 class="fw-bold mb-4">Featured Brands</h2>
+            <div class="row g-4">
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 bg-light p-4 text-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png" class="img-fluid" style="height: 50px; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 bg-light p-4 text-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/1280px-Samsung_Logo.svg.png" class="img-fluid" style="height: 50px; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 bg-light p-4 text-center">
+                        <img src="./realme.png" class="img-fluid" style="height: 50px; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 bg-light p-4 text-center">
+                        <img src="./oppo.jpeg" class="img-fluid" style="height: 50px; object-fit: contain;">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-links">
+                        <h5>Exclusive</h5>
+                        <p class="text-muted">Premium e-commerce solution for all your tech needs.</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Shipping Policy</a></li>
+                            <li><a href="#">Returns & Refunds</a></li>
+                            <li><a href="#">Track Order</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-links">
+                        <h5>Account</h5>
+                        <ul>
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Order History</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="#">Newsletter</a></li>
+                            <li><a href="#">Rewards</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-links">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 Exclusive. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <img src="./pngmart.jpeg" class="img-fluid" style="height: 30px;">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Countdown timer
+        function updateTimer() {
+            const now = new Date();
+            const endOfDay = new Date();
+            endOfDay.setHours(23, 59, 59, 999);
+            
+            const diff = endOfDay - now;
+            
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.querySelector('.timer').textContent = 
+                `${Math.floor(hours).toString().padStart(2, '0')} : ${Math.floor(minutes).toString().padStart(2, '0')} : ${Math.floor(seconds).toString().padStart(2, '0')}`;
+        }
+        
+        setInterval(updateTimer, 1000);
+        updateTimer();
+        
+        // Add to cart animation
+        document.querySelectorAll('.add-to-cart button').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.product-card');
+                card.classList.add('added-to-cart');
+                setTimeout(() => {
+                    card.classList.remove('added-to-cart');
+                }, 1000);
+                
+                // In a real app, you would add the item to the cart here
+                console.log('Added to cart:', card.querySelector('h6').textContent);
+            });
+        });
+    </script>
+</body>
+</html>
